@@ -5,14 +5,12 @@ import TextFields from '../../Components/TextBox/TextFields';
 import Login from '../Login/Login';
 
 const Signup = () => {
-    const ChangeRoute=()=>{
-        <Login />
-    }
+   
     return (
         <View>
-            <View style={{ padding: '10%', display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
-                <View style={{}}>
-                    <View style={{ display: 'flex', flexDirection: 'row-reverse', alignContent: 'center', justifyContent: 'space-around' }}>
+            <View style={styles.MainView}>
+                <View >
+                    <View style={styles.SubView}>
                         <Text style={{ textAlign: 'center', fontSize: 30 }}>
                             Sign Up
                         </Text>
@@ -30,7 +28,7 @@ const Signup = () => {
                         <TextFields placeholder='Confirm Password' style={styles.TextBox} />
                     </View>
                     <ButtonComponent title="Sign Up" />
-                    <View style={{ display: 'flex', flexDirection: 'row', marginTop: '7%' }}>
+                    <View style={styles.BottomView}>
                         {/* <View> */}
 
                         <Text>
@@ -39,7 +37,7 @@ const Signup = () => {
                         {/* </View>
                     <View> */}
 
-                        <TouchableOpacity onPress={ChangeRoute()}>
+                        <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
                             <Text style={{ color: '#3a76f0' }}> Login </Text>
                         </TouchableOpacity>
                         {/* </View> */}
@@ -63,6 +61,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#f6f6f6',
         marginTop: '8%',
         marginBottom: '5%'
+    },
+    MainView: {
+        padding: '10%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center'
+    },
+    SubView: {
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        alignContent: 'center',
+        justifyContent: 'space-around'
+    },
+    BottomView: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: '7%'
     }
 });
 export default Signup;

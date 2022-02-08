@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -27,8 +26,11 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Login from './Screens/Login/Login';
 import Signup from './Screens/SignUp/signUp';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-const Section = ({children, title}): Node => {
+
+const Section = ({ children, title }) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -54,18 +56,20 @@ const Section = ({children, title}): Node => {
   );
 };
 
-const App: () => Node = () => {
+const App= () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
+  const Stack = createStackNavigator();
   return (
-    <SafeAreaView >
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Signup />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login"  component={Login} />
+        <Stack.Screen name="Register" component={Signup} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
