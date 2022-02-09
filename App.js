@@ -1,11 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
 import {
   SafeAreaView,
@@ -16,7 +12,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
 import {
   Colors,
   DebugInstructions,
@@ -26,8 +21,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Login from './Screens/Login/Login';
 import Signup from './Screens/SignUp/signUp';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Home from './Screens/Home/Home';
 
 
 const Section = ({ children, title }) => {
@@ -55,21 +50,38 @@ const Section = ({ children, title }) => {
     </View>
   );
 };
-
-const App= () => {
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+const DrawerRoutes = () => {
+  return (
+    <Drawer.Navigator initialRouteName="Home" >
+      <Drawer.Screen name="Home" component={Home} />
+    </Drawer.Navigator>
+  );
+}
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  const Stack = createStackNavigator();
+
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login"  component={Login} />
+      <Stack.Navigator screenOptions={{ header: () => null }}>
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Signup} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Drawer" component={DrawerRoutes} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
+    // < View >
+
+    //   <Login />
+    // </View >
+
   );
 };
 
